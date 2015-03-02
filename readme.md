@@ -25,6 +25,7 @@ The configuration script can only be used within the DBC A/S
 Written in sass and compiled using libsass
 
 ### Webpack
+run `npm run start`to start webpack server
 
 ### Usage
 1. run `node index.js`
