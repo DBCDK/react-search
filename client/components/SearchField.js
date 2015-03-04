@@ -1,6 +1,11 @@
+var React = require('react'),
+    KEYCODES = {
+      ENTER_KEY_CODE : 13,
+      KEY_DOWN : 40,
+      KEY_UP : 38,
+    }
+    ;
 
-
-var React = require('react');
 
 var SearchField = React.createClass({
 
@@ -8,7 +13,7 @@ var SearchField = React.createClass({
     return {text: (this.props.initialValue) ? this.props.initialValue : ''};
   },
   render: function() {
-    var button = (this.props.button) ? (<input onClick={this._onClick} className="searchfield-button" value={this.props.buttonText} type="button" />) : "";
+    var button = (this.props.button) ? (<input onClick={this._onClick} className="searchfield-button" value={this.props.buttonValue} type="button" />) : "";
     return (
       <div className="searchfield">
       <input
