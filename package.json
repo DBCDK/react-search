@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "webpack-dev-server --hot --progress --colors",
-    "build": "webpack --progress --colors"
+    "start:hot": "webpack-dev-server --hot --progress --colors",
+    "start:watch": "webpack --progress --colors --watch -d",
+    "serve": "supervisor -w client,views,lib,routes index.js",
+    "build": "webpack --progress --colors",
+    "dev" : "parallelshell \"npm run serve -s\" \"npm run start:watch -s\""
   },
   "keywords": [
     "opensearch",
@@ -22,7 +25,10 @@
     "url": "https://github.com/DBCDK/react-search.git"
   },
   "dependencies": {
+    "express": "^4.12.1",
+    "express-handlebars": "^1.2.1",
     "react": "^0.12.2",
+    "react-router": "^0.12.4",
     "react-tools": "^0.12.2"
   },
   "devDependencies": {
