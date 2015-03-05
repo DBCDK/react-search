@@ -46,16 +46,22 @@ var SearchModule = React.createClass({
   },
 
   _onChange : function (event) {
-
+    //this could be used to implement an autocomplete
   },
   render: function() {
-    console.log(this.state.result);
     return (
       <div className='search'>
-      <SearchField initialValue={this.state.query} submit={this._onSubmit} change={this._onChange} button={true} buttonValue='Søg' />
-      <SearchResult result={this.state.result} pending={this.state.pending} >
-      </SearchResult>
-      </div>
+      <SearchField
+        initialValue={this.state.query}
+        submit={this._onSubmit}
+        change={this._onChange}
+        button={true}
+        buttonValue='Søg'
+      />
+      <SearchResult
+        result={this.state.result}
+        pending={this.state.pending}
+      />
       );
   }
 });
