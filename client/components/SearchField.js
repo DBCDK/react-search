@@ -3,9 +3,7 @@ var React = require('react'),
       ENTER_KEY_CODE : 13,
       KEY_DOWN : 40,
       KEY_UP : 38,
-    }
-    ;
-
+    };
 
 var SearchField = React.createClass({
 
@@ -32,11 +30,12 @@ var SearchField = React.createClass({
   _onChange: function(event, value) {
     var str = event.target.value.trim();
     this.setState({text: event.target.value});
+    this.props.change(event.target.value)
   },
 
   _onKeyDown: function(event) {
     if (event.keyCode === KEYCODES.ENTER_KEY_CODE) {
-      // Search should be initiated
+      this.props.submit(this.state.text);
     }
   }
 });

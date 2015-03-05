@@ -9,7 +9,7 @@
     "start:watch": "webpack --progress --colors --watch -d",
     "serve": "supervisor -w client,views,lib,routes index.js",
     "build": "webpack --progress --colors",
-    "dev" : "parallelshell \"npm run serve -s\" \"npm run start:watch -s\""
+    "dev": "parallelshell \"npm run serve -s\" \"npm run start:watch -s\""
   },
   "keywords": [
     "opensearch",
@@ -19,7 +19,6 @@
     "consolidation"
   ],
   "author": "DBC",
-  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "https://github.com/DBCDK/react-search.git"
@@ -29,7 +28,10 @@
     "express-handlebars": "^1.2.1",
     "react": "^0.12.2",
     "react-router": "^0.12.4",
-    "react-tools": "^0.12.2"
+    "react-tools": "^0.12.2",
+    "reflux": "^0.2.5",
+    "superagent": "^0.21.0",
+    "superagent-promise": "^0.2.0"
   },
   "devDependencies": {
     "babel-core": "^4.6.3",
