@@ -11,14 +11,14 @@ var SearchField = React.createClass({
     return {text: (this.props.initialValue) ? this.props.initialValue : ''};
   },
   render: function() {
-    var button = (this.props.button) ? (<input onClick={this._onClick} className="searchfield-button" value={this.props.buttonValue} type="button" />) : "";
+    var button = (this.props.button) ? (<input onClick={this._onClick} className='searchfield-button' value={this.props.buttonValue} type='button' />) : '';
     return (
-      <div className="searchfield">
+      <div className='searchfield'>
       <input
-        className="searchfield-input"
+        className='searchfield-input'
         type='text'
-        name="search"
-        ref="searchinput"
+        name='search'
+        ref='searchinput'
         value={this.state.text}
         onKeyDown={this._onKeyDown}
         onChange={this._onChange}
@@ -31,6 +31,9 @@ var SearchField = React.createClass({
     var str = event.target.value.trim();
     this.setState({text: event.target.value});
     this.props.change(event.target.value)
+  },
+  _onClick: function() {
+    this.props.submit(this.state.text);
   },
 
   _onKeyDown: function(event) {
