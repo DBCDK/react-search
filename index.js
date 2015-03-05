@@ -1,27 +1,33 @@
 var express = require('express'),
+    logger = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser'),
     path = require('path'),
     exphbs  = require('express-handlebars'),
-    routes = require('./routes/index'),
+    routes = require('./routes/routes'),
     app = express(),
-    helpers = require('./lib/helpers');
+    handlebars_helpers = require('./lib/handlebars/helpers');
 
+// Setup express env
+app.set('port', process.env.PORT || 3000);
 
+// Setup view engine
 var hbs = exphbs.create({
     defaultLayout: 'main',
-    helpers      : helpers,
-
-    // Uses multiple partials dirs, templates in "shared/templates/" are shared
-    // with the client-side of the app (see below).
-/*    partialsDir: [
-        'shared/templates/',
-        'views/partials/'
-    ]*/
+    helpers      : handlebars_helpers,
 });
 app.set('views', path.join(__dirname, 'views'))
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-app.use('/', express.static(__dirname + '/dist'));
+// Setup helpers
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+// Setup routing
+app.use('/', express.static(__dirname + '/public'));
 app.use('/', routes);
 
 /// catch 404 and forward to error handler
@@ -55,6 +61,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-app.listen(4001, function () {
-    console.log('express-handlebars example server listening on: 3000');
+app.listen(app.get('port'), function () {
+    console.log('express-handlebars example server listening on ' + app.get('port'));
 });
