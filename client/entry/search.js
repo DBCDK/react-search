@@ -3,7 +3,7 @@ var React = require('react'),
     Route = Router.Route,
     RouteHandler = Router.RouteHandler,
 
-    SearchModule = require('./modules/Search.module');
+    SearchModule = require('../modules/Search.module');
 
 // export for http://fb.me/react-devtools
 window.React = React;
@@ -15,6 +15,6 @@ var routes = (
 
 );
 
-Router.run(routes, Router.HistoryLocation, function (Handler) {
+Router.run(routes, Router.HistoryLocation, (Handler) => {
   React.render(<Handler/>, document.getElementById('search-module'));
 });

@@ -16,7 +16,7 @@
 
  module.exports = {
   entry: {
-    search:  './client/search.js',
+    search:  './client/entry/search.js',
   },
   output: {
     path: __dirname + '/dist',
