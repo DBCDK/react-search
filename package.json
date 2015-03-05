@@ -24,12 +24,17 @@
     "url": "https://github.com/DBCDK/react-search.git"
   },
   "dependencies": {
+    "es6-promise": "^2.0.1",
     "express": "^4.12.1",
     "express-handlebars": "^1.2.1",
+    "jsonpath-object-transform": "https://github.com/vibjerg/jsonpath-object-transform/archive/1.0.5.tar.gz",
+    "lodash": "^3.3.1",
     "react": "^0.12.2",
+    "react-loader": "^1.2.0",
     "react-router": "^0.12.4",
     "react-tools": "^0.12.2",
     "reflux": "^0.2.5",
+    "soap": "^0.8.0",
     "superagent": "^0.21.0",
     "superagent-promise": "^0.2.0"
   },
