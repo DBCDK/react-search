@@ -1,5 +1,5 @@
 node_modules
-dist/*.js
-dist/*.js.map
-dist/*.css
+public/*.js
+public/*.js.map
+public/*.css
 config.js
