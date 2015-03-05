@@ -11,7 +11,7 @@ var SearchField = React.createClass({
     return {text: (this.props.initialValue) ? this.props.initialValue : ''};
   },
   render: function() {
-    var button = (this.props.button) ? (<input onClick={this._onClick} className='searchfield-button' value={this.props.buttonValue} type='button' />) : '';
+    let button = (this.props.button) ? (<input onClick={this._onClick} className='searchfield-button' value={this.props.buttonValue} type='button' />) : '';
     return (
       <div className='searchfield'>
       <input
