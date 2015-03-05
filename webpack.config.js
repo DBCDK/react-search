@@ -2,19 +2,19 @@
  * Config file for webpack
  */
 
-var webpack = require('webpack');
+ var webpack = require('webpack');
 
-var definePlugin = new webpack.DefinePlugin({
+ var definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
   __PRERELEASE__: JSON.stringify(JSON.parse(process.env.BUILD_PRERELEASE || 'false'))
 });
 
-var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
+ var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
 
-var noErrors = new webpack.NoErrorsPlugin();
+ var noErrors = new webpack.NoErrorsPlugin();
 
-module.exports = {
-    entry: {
+ module.exports = {
+  entry: {
     search:  './client/search.js',
   },
   output: {
@@ -22,15 +22,31 @@ module.exports = {
     filename: '[name].js'
   },
   module: {
-      loaders: [
-            { test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
-            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
-            { test: /\.css$/, loader: "style!css" }
-        ]
+    loaders: [
+      {
+        test: /\.js?$/,
+        loaders: ['react-hot', 'babel'],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.scss$/,
+          // Query parameters are passed to node-sass
+        loader: "style!css!sass?outputStyle=expanded&" +
+          "includePaths[]=" +
+          (path.resolve(__dirname, "./bower_components")) + "&" +
+          "includePaths[]=" +
+          (path.resolve(__dirname, "./node_modules"))
+      }
+    ]
     },
     plugins: [
-        definePlugin,
-        commonsPlugin,
-        noErrors
+      definePlugin,
+      commonsPlugin,
+      noErrors
     ]
-};
+  };

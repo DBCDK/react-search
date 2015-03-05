@@ -41,6 +41,7 @@
     "jsx-loader": "^0.12.2",
     "parallelshell": "^1.0.4",
     "react-hot-loader": "^1.1.5",
+    "sass-loader": "^0.4.1",
     "watch": "^0.14.0",
     "webpack": "^1.6.0",
     "webpack-dev-server": "^1.7.0"
