@@ -48,9 +48,14 @@ TODO: run `npm run hot` to start webpack server for [Hot module replacement](htt
 
 ## Tool documentation
 Check theese links out, might be worth pursuiting
-*Server side rendering*
+**Server side rendering**
 * [Server side rendering from yahoo](https://github.com/yahoo/dispatchr)
 * [Alternative](https://gist.github.com/koistya/24715d295fbf710d1e24)
+* [React router serverside rendering](http://andreypopp.viewdocs.io/react-router-component/server-side)
+
+**Routing**
+* [React Router](https://github.com/rackt/react-router)
+* _This could be interesting_ => [React Router Component](http://andreypopp.viewdocs.io/react-router-component)
 
 ## TODO
 - Searchfield
