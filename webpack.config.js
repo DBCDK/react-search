@@ -12,6 +12,9 @@
 
  var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
 
+ // Do not rebuild assets on error.
+ // This is not activated because it can be dificult to catch errors during
+ // development
  var noErrors = new webpack.NoErrorsPlugin();
 
  module.exports = {
@@ -19,7 +22,7 @@
     search:  './client/entry/search.js',
   },
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/public',
     filename: '[name].js'
   },
   module: {
@@ -48,6 +51,6 @@
     plugins: [
       definePlugin,
       commonsPlugin,
-      noErrors
+      //noErrors
     ]
   };
