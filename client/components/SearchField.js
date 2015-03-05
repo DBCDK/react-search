@@ -30,15 +30,15 @@ var SearchField = React.createClass({
   _onChange: function(event, value) {
     var str = event.target.value.trim();
     this.setState({text: event.target.value});
-    this.props.change(event.target.value)
+    this.props.change && this.props.change(event.target.value)
   },
   _onClick: function() {
-    this.props.submit(this.state.text);
+    this.props.submit && this.props.submit(this.state.text);
   },
 
   _onKeyDown: function(event) {
     if (event.keyCode === KEYCODES.ENTER_KEY_CODE) {
-      this.props.submit(this.state.text);
+      this.props.submit && this.props.submit(this.state.text);
     }
   }
 });

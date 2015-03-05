@@ -32,7 +32,7 @@ describe('SearchField', function() {
 
     // Render a input field in the document
     var field = TestUtils.renderIntoDocument(
-     <SearchField button={true} buttonText='Search' />
+     <SearchField button={true} buttonValue='Search' />
      );
 
     // Get input field
