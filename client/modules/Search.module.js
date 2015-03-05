@@ -4,6 +4,7 @@ var _ = require('lodash'),
     Router = require('react-router'),
     SearchStore = require('../stores/SearchStore'),
     Actions = require('../actions/Actions'),
+    CqlGenerator = require('../utils/CqlGenerator'),
     SearchField = require('../components/SearchField'),
     SearchResult = require('../components/SearchResult');
 
@@ -21,7 +22,15 @@ var _ = require('lodash'),
  *   query: Current query being send to OpenSearch,
  *   pending: is a searchresult being loaded,
  *   result: search Result object
+ * }
  */
+
+function _search(value) {
+   let cql = CqlGenerator();
+   let query = cql.query(value).getQuery();
+   SearchStore.search(query);
+}
+
 var SearchModule = React.createClass({
   mixins: [Reflux.ListenerMixin, Router.Navigation, Router.State],
 
@@ -33,7 +42,7 @@ var SearchModule = React.createClass({
   },
   componentWillMount: function() {
    if (this.getParams().path) {
-    SearchStore.search(this.getParams().path);
+    _search(this.getParams().path);
    }
   },
   componentDidMount: function() {
@@ -43,12 +52,13 @@ var SearchModule = React.createClass({
   },
   _onSubmit : function (value) {
     this.transitionTo('search', {path: value});
+    _search(value);
   },
 
   _onChange : function (event) {
     //this could be used to implement an autocomplete
   },
-  render: function() {
+  render: function () {
     return (
       <div className='search'>
       <SearchField
@@ -62,6 +72,7 @@ var SearchModule = React.createClass({
         result={this.state.result}
         pending={this.state.pending}
       />
+      </div>
       );
   }
 });
