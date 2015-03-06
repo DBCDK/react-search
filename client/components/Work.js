@@ -13,7 +13,7 @@ var Work = React.createClass({
      <div className="Work">
       <h2>{element.title}</h2>
       <img src='http://lorempixel.com/400/200/' />
-      <div className='element'>{ (element.contributor) ? 'af ' + _mapElement(element.contributor) : ''}</div>
+      <div className='element'>{ (element.creator) ? 'af ' + _mapElement(element.creator) : ''}</div>
      </div>
     );
   }
