@@ -5,7 +5,7 @@ var agent = require('superagent-promise');
 
 var _store = {
  pending: false,
- result: [],
+ result: null,
  query: '',
 }
 
@@ -30,8 +30,12 @@ var SearchStore = reflux.createStore({
  search: function(query) {
   _store.pending = true;
   _store.query = query;
+  _store.result = null;
   this.trigger(_store);
   _search(query);
+ },
+ init: function() {
+  this.listenTo(actions.search, this.search);
  },
 });
 

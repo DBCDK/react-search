@@ -28,12 +28,19 @@ var _ = require('lodash'),
 function _search(value) {
    let cql = CqlGenerator();
    let query = cql.query(value).getQuery();
-   SearchStore.search(query);
+   Actions.search(query);
 }
 
 var SearchModule = React.createClass({
   mixins: [Reflux.ListenerMixin, Router.Navigation, Router.State],
-
+  propTypes: {
+    //buttonsHidden: React.PropTypes.array,
+    //selectedTab: React.PropTypes.string,
+    //mozLoop: React.PropTypes.object
+  },
+  getDefaultProps: function() {
+    return {};
+  },
   getInitialState: function() {
     let state = {
       query: this.getParams().path || null
@@ -69,6 +76,7 @@ var SearchModule = React.createClass({
         buttonValue='Søg'
       />
       <SearchResult
+        query={this.state.query}
         result={this.state.result}
         pending={this.state.pending}
       />
