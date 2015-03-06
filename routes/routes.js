@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     search = require('../lib/Search/Search.js'),
-    template = require('../lib/Search/Transformers/WorkTransformer.js')
+    template = require('../lib/Search/Transformers/dkabm.js')
 
 
 // GET home page.

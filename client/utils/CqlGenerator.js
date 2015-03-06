@@ -16,7 +16,6 @@ function stringToCql (value) {
  return processed;
 }
 
-
 const AND = ' and ',
       OR = ' or ',
       NOT = ' not '
