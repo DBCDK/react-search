@@ -2,8 +2,7 @@ var React = require('react'),
     Router = require('react-router'),
     Route = Router.Route,
     RouteHandler = Router.RouteHandler,
-
-    SearchModule = require('../modules/Search.module');
+    SearchModule = require('../components/Search.module');
 
 // export for http://fb.me/react-devtools
 window.React = React;
