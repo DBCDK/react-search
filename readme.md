@@ -66,6 +66,9 @@ Check theese links out, might be worth pursuiting
 - add to Favorites
 
 ## Coding principles and libraries
+**ES6**
+* This project uses [babel](http://babeljs.io/) to convert es6 to es5
+
 **Reactive functional Programming**
 * [RxJS](https://github.com/Reactive-Extensions/RxJS)
 
