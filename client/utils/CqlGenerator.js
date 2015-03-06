@@ -1,3 +1,13 @@
+
+/**
+ * Converts a string to valid cql
+ *
+ * Tests in a string contains space. If so adds quotes
+ * TODO: Handle quotes
+ *
+ * @param  {String} value inputstring from user
+ * @return {String}       cql formatted string
+ */
 function stringToCql (value) {
  let processed = value;
  if (/ /.exec(value)){
@@ -5,6 +15,7 @@ function stringToCql (value) {
  }
  return processed;
 }
+
 
 const AND = ' and ',
       OR = ' or ',
