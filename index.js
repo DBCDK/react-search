@@ -1,3 +1,7 @@
+// Convert es6 to es5
+require("babel/register");
+
+// Import dependencies
 var express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
