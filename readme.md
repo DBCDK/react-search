@@ -23,6 +23,11 @@ This command will start a webpack watcher and a node server in watchmode
 3. start node server using (supervisor?/nodemon?)
 
 ### Tests
+run `npm test` to run all tests
+
+To run a single test jest-cli needs to be installed globally `npm install jest-cli -g`
+the run `jest [filename]`. Path to file does not need to be included.
+
 All commits/pull requests should include tests of added functionality using Jest
 [See documentation for jest](https://facebook.github.io/jest/)
 For information on how to test React components [see information about test-utils add-on](http://facebook.github.io/react/docs/test-utils.html)
