@@ -32,6 +32,7 @@ app.use(cookieParser());
 
 // Setup routing
 app.use('/', express.static(__dirname + '/public'));
+app.use('/style', express.static(__dirname + '/style'));
 app.use('/', routes);
 
 /// catch 404 and forward to error handler
