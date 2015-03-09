@@ -4,11 +4,19 @@
 .idea
 
 # ============== #
-# node_modules #
+# node_modules   #
 # ============== #
 node_modules
+
+# ============== #
+# public         #
+# ============== #
 public/*.js
 public/*.js.map
 public/*.css
 public/*.css.map
+
+# ============== #
+# config         #
+# ============== #
 config.js
