@@ -7,6 +7,14 @@ This document also provides some links to documentation of the different tools u
 ### Installation
 After cloning run `npm install`
 
+To run the build scripts install the following packages gobally
+* webpack
+* node-sass
+* parallelshell
+* supervisor
+
+`npm install -g webpack node-sass parallelshell supervisor`
+
 ### Build
 run `npm run build`
 Preprocesses js and sass
