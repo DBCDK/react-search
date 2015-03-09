@@ -41,6 +41,13 @@ The configuration script can only be used within the DBC A/S
 ### CSS
 Written in sass and compiled using Webpack [sass-loader](https://www.npmjs.com/package/sass-loader) (This has not been tested yet)
 
+run `npm run css:watch` to build css on the fly with source maps
+
+### SVG files
+Use svg-sprite to handle svg files. Should be installed globally to run commandline commando
+
+`svg-sprite --css --css-render-css --css-example --dest=dist app/static/images/*.svg -s`
+
 ### Webpack
 Module bundling is done using webpack
 [See documentation for webpack](http://webpack.github.io/docs/)
