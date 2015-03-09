@@ -1,4 +1,11 @@
-node_modules
+# ============== #
+# Idea generated #
+# ============== #
+.idea
+
+# ============== #
+# node_modules #
+# ============== #
 public/*.js
 public/*.js.map
 public/*.css
