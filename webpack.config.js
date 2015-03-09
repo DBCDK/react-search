@@ -21,6 +21,7 @@
   entry: {
     search:  './client/entry/search.js',
   },
+  devtool: "source-map",
   output: {
     path: __dirname + '/public',
     filename: '[name].js'
@@ -37,18 +38,10 @@
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
-      {
-        test: /\.scss$/,
-          // Query parameters are passed to node-sass
-        loader: "style!css!sass?outputStyle=expanded&" +
-          "includePaths[]=" +
-          (path.resolve(__dirname, "./bower_components")) + "&" +
-          "includePaths[]=" +
-          (path.resolve(__dirname, "./node_modules"))
-      }
     ]
     },
     plugins: [
+      //new webpack.optimize.UglifyJsPlugin({minimize: true})
       definePlugin,
       commonsPlugin,
       //noErrors
