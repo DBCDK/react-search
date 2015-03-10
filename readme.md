@@ -64,7 +64,7 @@ TODO: run `npm run hot` to start webpack server for [Hot module replacement](htt
 
 ### Usage
 1. run `node index.js`
-2. Fire up your favorite browser port "4001" and enter a search frase
+2. Fire up your favorite browser port "3000" and enter a search frase
 
 ## Tool documentation
 Check theese links out, might be worth pursuiting
@@ -76,6 +76,9 @@ Check theese links out, might be worth pursuiting
 **Routing**
 * [React Router](https://github.com/rackt/react-router)
 * _This could be interesting_ => [React Router Component](http://andreypopp.viewdocs.io/react-router-component)
+
+**Sockets**
+* [engine.io] (https://github.com/Automattic/engine.io) as a lightweight socket solution (The transportation layer for socket.io)
 
 ## TODO
 - Searchfield
