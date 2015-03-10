@@ -34,9 +34,6 @@ function _search(value) {
 var SearchModule = React.createClass({
   mixins: [Reflux.ListenerMixin, Router.Navigation, Router.State],
   propTypes: {
-    //buttonsHidden: React.PropTypes.array,
-    //selectedTab: React.PropTypes.string,
-    //mozLoop: React.PropTypes.object
   },
   getDefaultProps: function() {
     return {};
