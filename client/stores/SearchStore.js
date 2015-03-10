@@ -10,7 +10,7 @@ var _store = {
 }
 
 function _search(query) {
- agent.get('/API/search', {query : query}).end()
+ agent.get('/API/search', {query : query, holdings : true}).end()
  .then(function onResult(res) {
   _store.result = res.body.collections;
   _store.pending = false;
