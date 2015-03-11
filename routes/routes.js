@@ -20,7 +20,7 @@ router.get('/API/search', (req, res) => {
     // 2. Search object is transformed
     .transform(template)
     // 3. Holdings are added
-    .add(holdings.get)
+    //.add(holdings.get)
     // 4. Result is returned
     .then((result) => res.send(result))
     // Did any errors happen?
