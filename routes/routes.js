@@ -7,23 +7,27 @@ var express = require('express'),
 
 // GET search page.
 router.get(['/search', '/search/*'], (req, res) => {
-  res.render('search', {
-    title: 'Main',
-    module: 'search',
-    state: ''
-  });
+  res.render('search');
 });
 
 // Search API routes
 router.get('/API/search', (req, res) => {
-  let query = unescape(req.query.query);
+  var query = unescape(req.query.query);
+  // This is where the magic happens
+  //
+  //   1. Search performed
   search.get(query)
+    // 2. Search object is transformed
     .transform(template)
-    //.add(holdings.get)
+    // 3. Holdings are added
+    .add(holdings.get)
+    // 4. Result is returned
     .then((result) => res.send(result))
+    // Did any errors happen?
     .catch((err) => res.send(err));
 });
 
+// Fallback route : redirect non-targeted routes to /search/
 router.get('*', (req, res) => res.redirect('/search/'));
 
 
