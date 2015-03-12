@@ -17,7 +17,7 @@ socket.on('search', function(data){
   //1. Search performed
   search.get(data.query)
   // 2. Search object is transformed
-  .transform(template)
+  .then(template)
   // Emit result
   .emit('search')
   .then(holdings.get)
