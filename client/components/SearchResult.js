@@ -11,7 +11,7 @@ var SearchResult = React.createClass({
     if (result.length) {
       return result.map((work, i) => {
         let holdings = {status : 'home', text : 'tilgængelig på biblioteket'}
-        return (<Work key={i} element={work} holdings={holdings} />);
+        return (<Work key={i} element={work} />);
       });
     }
     else {
