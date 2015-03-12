@@ -28,7 +28,6 @@ var SearchField = React.createClass({
     );
   },
   _onChange: function(event, value) {
-    var str = event.target.value.trim();
     this.setState({text: event.target.value});
     this.props.change && this.props.change(event.target.value)
   },
