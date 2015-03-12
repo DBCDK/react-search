@@ -10,7 +10,9 @@ var express = require('express'),
     exphbs  = require('express-handlebars'),
     routes = require('./routes/routes'),
     app = express(),
-    handlebars_helpers = require('./lib/handlebars/helpers');
+    server = require('http').Server(app),
+    handlebars_helpers = require('./lib/handlebars/helpers'),
+    sockets = require('./sockets/sockets')(server);
 
 // Setup express env
 app.set('port', process.env.PORT || 3000);
@@ -66,6 +68,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-app.listen(app.get('port'), function () {
+server.listen(app.get('port'), function () {
     console.log('express-handlebars example server listening on ' + app.get('port'));
 });
