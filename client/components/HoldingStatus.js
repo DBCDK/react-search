@@ -2,13 +2,13 @@ var React = require('react');
 
 var HoldingStatus = React.createClass({
   render: function() {
-    var holdings = this.props.element;
+    var holdings = this.props.element || {};
     var cx = React.addons.classSet;
     var classes = cx({
-      'home': holdings.home,
-      'willLend': holdings.willLend,
+      'home': holdings.home || false,
+      'willLend': holdings.willLend || false,
       'house': true,
-      'error' : holdings.error
+      'error' : holdings.error || false
     });
 
     return (

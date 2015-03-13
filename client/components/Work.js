@@ -10,7 +10,7 @@ function _mapElement(element) {
 var Work = React.createClass({
   render : function() {
     var element = this.props.element;
-    var holdings = this.props.element.holdings && (<Holdings element={this.props.element.holdings} />);
+    var holdings = (<Holdings element={this.props.element.holdings && this.props.element.holdings} />);
     return (
      <div className="Work">
       <h2>{element.title}</h2>
