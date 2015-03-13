@@ -5,26 +5,25 @@ var socketIo = require('socket.io'),
 
 
 
-module.exports = function (app) {
-  socketIo(app).on('connection', (socket) => routes(socket));
+module.exports = function(app) {
+    socketIo(app).on('connection', (socket) => routes(socket));
 }
 
 function routes(socket) {
-var search = Search(socket);
-// Search
-socket.on('search', function(data){
-  console.log(data);
-  //1. Search performed
-  search.get(data.query)
-  // 2. Search object is transformed
-  .then(template)
-  // Emit result
-  .emit('search')
-  .then(holdings.get)
-  .emit('search')
-  //.add(basket, 'basket')
-  //.catch()
-  ;
-});
-
+    var search = Search(socket);
+    // Search
+    socket.on('search', function(data) {
+        //1. Search performed
+        search.get(data.query)
+            // 2. Search object is transformed
+            .then(template)
+            // Emit result
+            .emit('search')
+            // Get holdings
+            .then(holdings().get)
+            .emit('search');
+        // Get Favourites (kurv)
+        //.then(Favourites)
+        //.emit('search');
+    });
 }
