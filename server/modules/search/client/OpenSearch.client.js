@@ -5,7 +5,9 @@ var _default = {
   agency : config.agency,
   profile : config.profile,
   start : 1,
-  stepValue : 10
+  stepValue : 10,
+  sort : 'rank_frequency',
+  collectionType : 'manifestation'
 }
 
 var opensearch = baseclient.client(config.wsdl, _default);
