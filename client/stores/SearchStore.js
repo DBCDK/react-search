@@ -9,11 +9,11 @@ var _store = {
 }
 
 function _listen(cb) {
-  socket.on('search', (data) => cb(data));
+  socket.on('searchResult', (data) => cb(data));
 }
 
 function _socketSearch(query) {
-  socket.emit('search', {
+  socket.emit('searchRequest', {
     query: query
   });
 }

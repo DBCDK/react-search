@@ -10,13 +10,13 @@ function _mapElement(element) {
 var Work = React.createClass({
   render : function() {
     var element = this.props.element;
-    var holdings = (<Holdings element={this.props.element.holdings && this.props.element.holdings} />);
     return (
      <div className="Work">
       <h2>{element.title}</h2>
-      <img src='http://lorempixel.com/400/200/' />
-      <div className='element'>{ (element.creator.length) ? 'af ' + _mapElement(element.creator[0]) : ''}</div>
-        {holdings}
+      <img src='http://lorempixel.com/200/400/' />
+      <div className='element author'>{ (element.creator.length) ? 'af ' + _mapElement(element.creator[0]) : ''}</div>
+      <div className='element abstract'>{ element.abstract }</div>
+      <Holdings pid={element.id} />
      </div>
     );
   }

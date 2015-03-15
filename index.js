@@ -12,7 +12,7 @@ var express = require('express'),
     app = express(),
     server = require('http').Server(app),
     handlebars_helpers = require('./lib/handlebars/helpers'),
-    sockets = require('./sockets/sockets')(server);
+    modules = require('./server')(server);
 
 // Setup express env
 app.set('port', process.env.PORT || 3000);

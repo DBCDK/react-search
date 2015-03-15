@@ -1,8 +1,31 @@
 var React = require('react');
+var HoldingStore = require('../stores/HoldingStore');
+var Actions = require('../actions/Actions');
+var Reflux = require('reflux');
+
 
 var HoldingStatus = React.createClass({
+  mixins : [Reflux.ListenerMixin],
+  _updateState : function (holdings) {
+    console.log(holdings[this.state.pid], this.state.pid);
+    if (holdings[this.state.pid]) {
+      var state = this.state;
+      state.element = holdings[this.state.pid].holding;
+      this.setState(state);
+    }
+  },
+  getInitialState : function () {
+    return this.props;
+  },
+  componentWillMount : function () {
+    Actions.holdings(this.state.pid);
+  },
+  componentDidMount : function () {
+    this.listenTo(HoldingStore, this._updateState);
+  },
   render: function() {
-    var holdings = this.props.element || {};
+    console.log(this.state.element, 'update holdibgs');
+    var holdings = this.state.element || {};
     var cx = React.addons.classSet;
     var classes = cx({
       'home': holdings.home || false,
