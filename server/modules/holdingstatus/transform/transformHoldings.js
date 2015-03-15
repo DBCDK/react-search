@@ -3,7 +3,7 @@ module.exports = function mutateHoldingsResponse(response) {
     let holding = response.responder;
     return {
       pid : holding.pid,
-      home : Date.parse(Date().slice(0, 15)) <= Date.parse(holding.expectedDelivery),
+      home : (Date.parse(Date().slice(0, 15)) == Date.parse(new Date(holding.expectedDelivery).toLocaleDateString())),
       willLend : (response.responder.willLend === 'true'),
       expectedDelivery : (new Date(holding.expectedDelivery)).toLocaleDateString(),
     }
