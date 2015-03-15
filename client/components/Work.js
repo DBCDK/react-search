@@ -11,7 +11,7 @@ var Work = React.createClass({
   render : function() {
     var element = this.props.element;
     return (
-     <div className="Work">
+     <div className="Work" id={element.id}>
       <h2>{element.title}</h2>
       <img src='http://lorempixel.com/200/400/' />
       <div className='element author'>{ (element.creator.length) ? 'af ' + _mapElement(element.creator[0]) : ''}</div>
