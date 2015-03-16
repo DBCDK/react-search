@@ -3,7 +3,7 @@
  */
 
  var webpack = require('webpack');
- var path = require('path')
+ var path = require('path');
 
  var definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
@@ -41,7 +41,7 @@
     ]
     },
     plugins: [
-      //new webpack.optimize.UglifyJsPlugin({minimize: true})
+      new webpack.optimize.UglifyJsPlugin({minimize: true}),
       definePlugin,
       commonsPlugin,
       //noErrors
