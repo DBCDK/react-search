@@ -3,7 +3,6 @@ var actions = require('../actions/Actions.js');
 var socket = require('socket.io-client').connect();
 
 var _store = {
-  holdings: {}
 }
 
 function _listen(cb) {
@@ -23,16 +22,15 @@ var FrontpageStore = reflux.createStore({
   request: function(pid) {
     _store[pid] = {
       pending : true,
-      images : null,
+      images : [],
     };
     this.trigger(_store);
     _frontpageRequest(pid);
   },
   result: function (result) {
-    console.log(result);
-    //_store[result.pid].pending = false;
-    //_store[result.pid].images = result.images;
-    //this.trigger(_store);
+    _store[result.pid].pending = false;
+    _store[result.pid].images = result.images;
+    this.trigger(_store);
   },
   init: function() {
     this.listenTo(actions.frontpage, this.request);
