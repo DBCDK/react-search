@@ -1,0 +1,16 @@
+.house::before {
+ content: " ";
+  display: inline-block;
+  background: gray;
+  width: 20px;
+  height: 20px;
+}
+
+.house.error::before {
+ background: red;
+}
+.house.home::before {
+  background: green;
+}
+
+
