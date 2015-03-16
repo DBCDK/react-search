@@ -7,8 +7,8 @@
     "test": "jest",
     "start:hot": "webpack-dev-server --hot --progress --colors",
     "start:watch": "webpack --progress --colors --watch -d",
-    "css:watch": "node-sass -w -o public --output-style compressed --source-map public/main.css.map  style/main.scss main.css",
-    "css:build": "node-sass -o public --output-style compressed style/main.scss main.css",
+    "css:watch": "node-sass -w -o public --include-path style/components --output-style compressed --source-map public/main.css.map  style/main.scss main.css",
+    "css:build": "node-sass -o public --include-path style/components --output-style compressed style/main.scss main.css",
     "serve": "supervisor -w client,views,lib,routes,server index.js",
     "build": "webpack --progress --colors --optimize-minimize",
     "dev": "parallelshell \"npm run serve -s\" \"npm run css:build\" \"npm run start:watch -s\" \"npm run css:watch -s\""
@@ -58,7 +58,6 @@
     "node-sass": "^2.0.1",
     "parallelshell": "^1.0.4",
     "react-hot-loader": "^1.1.5",
-    "sass-loader": "^0.4.1",
     "watch": "^0.14.0",
     "webpack": "^1.6.0",
     "webpack-dev-server": "^1.7.0"
