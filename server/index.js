@@ -4,4 +4,5 @@ module.exports = function (server) {
   ///Load Modules
   require('./modules/search/search.js')(dispatcher);
   require('./modules/holdingstatus/holdings.js')(dispatcher);
+  require('./modules/frontpage/frontpage.js')(dispatcher);
 }
