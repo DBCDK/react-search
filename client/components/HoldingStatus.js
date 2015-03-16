@@ -33,7 +33,7 @@ var HoldingStatus = React.createClass({
     });
 
     return (
-      <span className = {classes}>{holdings.expectedDelivery || holdings.errorMessage}< /span>
+      <span className = {classes}>{holdings.expectedDelivery || holdings.errorMessage}</span>
     );
   }
 });
