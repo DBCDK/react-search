@@ -13,11 +13,13 @@ var Frontpage = React.createClass({
     if (frontpages[this.state.pid]) {
       var state = this.state;
       state.images = frontpages[this.state.pid].images || [];
+      state.pending = frontpages[this.state.pid].pending;
       this.setState(state);
     }
   },
   getInitialState : function () {
     return {
+      pending : true,
       pid : this.props.pid,
       size : this.props.size,
       images : []
@@ -30,10 +32,23 @@ var Frontpage = React.createClass({
     this.listenTo(FrontpageStore, this._updateState);
   },
   render: function() {
-    var image = _getImage(this.state.images, this.state.size);
-    return image && (
-      <img src={image.url} />
-    ) || (<span />);
+    var img;
+    if (this.state.pending) {
+      img = (<img className='loader' src="/loader.gif" />)
+    }
+    else if (this.state.images.length) {
+       var image = _getImage(this.state.images, this.state.size);
+       img = (<img className="frontpage" src={image.url} />)
+    }
+    else {
+     img = (<img className="no-image" src="/no-image.png" />)
+    }
+
+    return (
+      <div className="frontpage">
+        {img}
+      </div>
+      )
   }
 });
 

@@ -30,7 +30,6 @@ var HoldingStore = reflux.createStore({
     _holdingsRequest(pid);
   },
   result: function (result) {
-    console.log(result);
     _store[result.pid].pending = false;
     _store[result.pid].holding = result;
     this.trigger(_store);
