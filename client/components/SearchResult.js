@@ -32,7 +32,6 @@ var SearchResult = React.createClass({
       </div>
       );
    }
-   ,
  });
 
 module.exports = SearchResult;

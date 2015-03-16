@@ -2,24 +2,24 @@
  * Config file for webpack
  */
 
- var webpack = require('webpack');
- var path = require('path');
+var webpack = require('webpack');
+var path = require('path');
 
- var definePlugin = new webpack.DefinePlugin({
+var definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
   __PRERELEASE__: JSON.stringify(JSON.parse(process.env.BUILD_PRERELEASE || 'false'))
 });
 
- var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
+var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
 
- // Do not rebuild assets on error.
- // This is not activated because it can be dificult to catch errors during
- // development
- var noErrors = new webpack.NoErrorsPlugin();
+// Do not rebuild assets on error.
+// This is not activated because it can be dificult to catch errors during
+// development
+var noErrors = new webpack.NoErrorsPlugin();
 
- module.exports = {
+module.exports = {
   entry: {
-    search:  './client/entry/search.js',
+    search: './client/entry/search.js'
   },
   devtool: "source-map",
   output: {
@@ -39,11 +39,10 @@
         loader: 'babel-loader'
       },
     ]
-    },
-    plugins: [
-      //new webpack.optimize.UglifyJsPlugin({minimize: true})
-      definePlugin,
-      commonsPlugin,
-      //noErrors
-    ]
-  };
+  },
+  plugins: [
+    definePlugin,
+    commonsPlugin
+    //noErrors
+  ]
+};

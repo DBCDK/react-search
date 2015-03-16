@@ -24,7 +24,7 @@ var HoldingStore = reflux.createStore({
   request: function(pid) {
     _store[pid] = {
       pending : true,
-      holding : null,
+      holding : null
     };
     this.trigger(_store);
     _holdingsRequest(pid);
@@ -37,7 +37,7 @@ var HoldingStore = reflux.createStore({
   init: function() {
     this.listenTo(actions.holdings, this.request);
     _listen(this.result);
-  },
+  }
 });
 
 module.exports = HoldingStore;

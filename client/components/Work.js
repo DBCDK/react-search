@@ -1,6 +1,7 @@
 var React = require('react'),
     Holdings = require('./HoldingStatus'),
-    Frontpage = require('./Frontpage.js');
+    Frontpage = require('./Frontpage.js'),
+    Cart = require('./Cart.react.js');
 
 function _mapElement(element) {
   if (Array.isArray(element)) {
@@ -18,6 +19,7 @@ var Work = React.createClass({
       <div className='element author'>{ (element.creator.length) ? 'af ' + _mapElement(element.creator[0]) : ''}</div>
       <div className='element abstract'>{ element.abstract }</div>
       <Holdings pid={element.id} />
+      <Cart pid={element.id} />
      </div>
     );
   }

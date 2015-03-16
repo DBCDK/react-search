@@ -7,4 +7,4 @@ module.exports = {
   holdings: (query) => openHoldingsstatus.request('holdingsService', {
     lookupRecord: query
   })
-}
+};
