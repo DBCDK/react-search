@@ -11,7 +11,6 @@ function _listen(cb) {
 }
 
 function _holdingsRequest(pid) {
-  console.log(pid, 'request');
   socket.emit('holdingsRequest', {
     pid: pid,
     responderId : '714700'

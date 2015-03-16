@@ -7,7 +7,6 @@ var Reflux = require('reflux');
 var HoldingStatus = React.createClass({
   mixins : [Reflux.ListenerMixin],
   _updateState : function (holdings) {
-    console.log(holdings[this.state.pid], this.state.pid);
     if (holdings[this.state.pid]) {
       var state = this.state;
       state.element = holdings[this.state.pid].holding;
@@ -24,7 +23,6 @@ var HoldingStatus = React.createClass({
     this.listenTo(HoldingStore, this._updateState);
   },
   render: function() {
-    console.log(this.state.element, 'update holdibgs');
     var holdings = this.state.element || {};
     var cx = React.addons.classSet;
     var classes = cx({
