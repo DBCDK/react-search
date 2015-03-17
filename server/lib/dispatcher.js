@@ -1,5 +1,5 @@
 var socketIo = require('socket.io');
-var authentication = require('./authentication.js');
+var authentication = require('./authentication/io.auth.js');
 
 /**
  * Contains all eventlisteners that should be instantiated on new connections
@@ -16,10 +16,11 @@ var _connections = new Array();
  */
 function Dispatcher(server) {
   var socketServer = socketIo.listen(server);
-  socketServer.use(authentication({
+  authentication(socketServer);
+  /*socketServer.use(authentication({
     encrypt_key: "crypt", // Add any key for encrypting data
     validate_key: "sign" // Add any key for signing data
-  }));
+  }));*/
   socketServer.on('connection', makeConnection);
 
   /**
@@ -64,7 +65,8 @@ function Dispatcher(server) {
   // Return factory, with a method for adding an event listener
   return {
     listen: addListener,
-    emitToUser : emitToUser
+    emitToUser : emitToUser,
+    io : socketServer
   }
 }
 

@@ -10,6 +10,7 @@ var express = require('express'),
     exphbs  = require('express-handlebars'),
     routes = require('./routes/routes'),
     app = express(),
+    authentication = require('./server/lib/authentication')(app),
     server = require('http').Server(app),
     handlebars_helpers = require('./lib/handlebars/helpers');
     modules = require('./server')(server);
