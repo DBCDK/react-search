@@ -11,9 +11,7 @@ function _listen(callback) {
 }
 
 function _cartRequest(){
-  Socket.emit('cartRequest', {
-    userId: 'mmj@dbc.dk'
-  });
+  Socket.emit('cartRequest', 'mmj@dbc.dk');
 }
 
 var CartStore = Reflux.createStore({

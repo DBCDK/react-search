@@ -11,7 +11,7 @@ var express = require('express'),
     routes = require('./routes/routes'),
     app = express(),
     server = require('http').Server(app),
-    handlebars_helpers = require('./lib/handlebars/helpers'),
+    handlebars_helpers = require('./lib/handlebars/helpers');
     modules = require('./server')(server);
 
 // Setup express env
@@ -20,9 +20,9 @@ app.set('port', process.env.PORT || 3000);
 // Setup view engine
 var hbs = exphbs.create({
     defaultLayout: 'main',
-    helpers      : handlebars_helpers,
+    helpers      : handlebars_helpers
 });
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 

@@ -1,12 +1,16 @@
 var baseclient = require('../../../lib/Base.client');
 var config = baseclient.config.openuserinfo;
-var _default = {};
+
+var _default = {
+  securityCode: config.securityCode,
+  outputType:'soap'
+};
 var openUserinfo = baseclient.client(config.wsdl, _default);
 
+var options = {
+  endpoint: config.endpoint
+};
+
 module.exports = {
-  cart: (query) => {
-    openUserinfo.request('getCart', {
-      lookupRecord:query
-    })
-  }
+  cart: (user) => openUserinfo.request('getCart', {userId: user}, options)
 };

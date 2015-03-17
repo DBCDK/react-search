@@ -21,19 +21,19 @@ BaseClient.client = function (wsdl, config, cache) {
    * @param  {String} wsdl url for service wsdl
    * @return {Promise}
    */
-  function _client(wsdl) {
+  function _client(wsdl, options) {
     return new Promise((resolve, reject) => {
       if (_soapclient) {
         resolve(_soapclient);
       }
       // Create soap client from a given wsdl
-      soap.createClient(wsdl, (err, client) => {
+      soap.createClient(wsdl, options, (err, client) => {
         // Resolve promise from result
         if (err) {
           reject(err)
         }
         else {
-          _soapclient = client
+          _soapclient = client;
           resolve(client);
         }
       });
@@ -63,15 +63,18 @@ BaseClient.client = function (wsdl, config, cache) {
           call(options, cb);
         }, callback);
   }
+
   /**
    * Make request to soap service
    * @param  {String} action  Type of request
-   * @param  {Object} options map of options
+   * @param  {Object} params map of params
+   * @param  {Object} opt map of extra options i.e. alternative endpoint
    * @return {Promise}
    */
-  function call(action, options) {
-    return _client(wsdl).then(function (client) {
-      var o = util._extend(config, options);
+  function call(action, params, opt) {
+    let options = opt || {};
+    return _client(wsdl, options).then(function (client) {
+      var o = util._extend(config, params);
       return _action(client, action, o);
     });
   }
@@ -80,6 +83,6 @@ BaseClient.client = function (wsdl, config, cache) {
   return {
     request: call
   }
-}
+};
 
 module.exports = BaseClient;
