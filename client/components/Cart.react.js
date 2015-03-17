@@ -26,7 +26,9 @@ var Cart = React.createClass({
   },
 
   onClick: function(){
-    console.log(this.state);
+    var state = this.state;
+    state.inCart = !state.inCart;
+    this.setState(state);
   },
 
   render: function() {
