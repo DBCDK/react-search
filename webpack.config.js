@@ -19,7 +19,7 @@ var noErrors = new webpack.NoErrorsPlugin();
 
 module.exports = {
   entry: {
-    search: './client/entry/search.entry.js'
+    search: './client/entry/search.entry.js',
     login: './client/entry/login.entry.js'
   },
   devtool: "source-map",
