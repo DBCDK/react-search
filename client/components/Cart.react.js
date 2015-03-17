@@ -6,7 +6,11 @@ var Reflux = require('reflux');
 var Cart = React.createClass({
   mixins : [Reflux.ListenerMixin],
 
-  _updateState: function(cart){
+  _updateState: function(_store){
+    var cartContent = _store.cart;
+    var state = this.state;
+    state.inCart = (cartContent.indexOf(state.pid) != -1);
+    this.setState(state);
   },
 
   getInitialState: function() {
@@ -26,7 +30,8 @@ var Cart = React.createClass({
   },
 
   render: function() {
-    return <input type='button' value='Add to cart' onClick={this.onClick}/>;
+    var value = (this.state.inCart) ? 'Remove from cart' : 'Add to cart';
+    return <input type='button' value={value} onClick={this.onClick}/>;
   }
 });
 

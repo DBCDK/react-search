@@ -3,7 +3,8 @@ var Actions = require('../actions/Actions');
 var Socket = require('socket.io-client').connect();
 
 var _store = {
-  cart: {}
+  pending: false,
+  cart: []
 };
 
 function _listen(callback) {
@@ -20,23 +21,21 @@ var CartStore = Reflux.createStore({
   },
 
   request: function(){
-    _store = {
-      pending: true,
-      inCart: false
-    };
-    this.trigger(_store);
-    _cartRequest();
+    if(!_store.pending){
+      _cartRequest();
+      _store.pending = true;
+      this.trigger(_store);
+    }
   },
 
   result: function(result){
-    console.log('callback', result);
+    _store.pending = false;
+    _store.cart = result;
+    this.trigger(_store);
   },
 
   init: function(){
     this.listenTo(Actions.cart, this.request);
-    Socket.on('cartRequest', function(data) {
-      console.log('cartRequest', data);
-    });
     _listen(this.result);
   }
 });
