@@ -4,9 +4,9 @@ var Actions = require('../actions/Actions');
 var Reflux = require('reflux');
 
 var Cart = React.createClass({
-  mixins : [Reflux.ListenerMixin],
+  mixins: [Reflux.ListenerMixin],
 
-  _updateState: function(_store){
+  _updateState: function(_store) {
     var cartContent = _store.cart;
     var state = this.state;
     state.inCart = (cartContent.indexOf(state.pid) != -1);
@@ -25,7 +25,7 @@ var Cart = React.createClass({
     this.listenTo(CartStore, this._updateState);
   },
 
-  onClick: function(){
+  onClick: function() {
     var state = this.state;
     state.inCart = !state.inCart;
     this.setState(state);
