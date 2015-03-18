@@ -23,7 +23,6 @@ var CartStore = Reflux.createStore({
 
   request: function() {
     if(!_store.pending) {
-      console.log('request');
       _cartRequest();
       _store.pending = true;
       this.trigger(_store);
@@ -36,11 +35,7 @@ var CartStore = Reflux.createStore({
     this.trigger(_store);
   },
 
-  addCartContentResult: function(data, pid){
-
-    console.log(_store);
-    console.log(this);
-
+  addCartContentResult: function(data, pid) {
     _store.cart[pid] = {};
     _store.cart[pid].pid = pid;
     _store.cart[pid].id = data;
@@ -49,13 +44,26 @@ var CartStore = Reflux.createStore({
   },
 
   addCartContent: function(pid) {
-    Socket.on('addCartContentResult', (data) => this.addCartContentResult(data, pid));
+    Socket.once('addCartContentResult', (data) => this.addCartContentResult(data, pid));
     Socket.emit('addCartContent', pid);
+  },
+
+  removeCartContent: function(cartId, pid) {
+    if(cartId) {
+      Socket.once('removeCartContentResult', (data) => this.removeCartContentResult(data, pid));
+      Socket.emit('removeCartContent', cartId);
+    }
+  },
+
+  removeCartContentResult: function(data, pid){
+    delete _store.cart[pid];
+    this.trigger(_store);
   },
 
   init: function() {
     this.listenTo(Actions['getCart'], this.request);
     this.listenTo(Actions['addCartContent'], this.addCartContent);
+    this.listenTo(Actions['removeCartContent'], this.removeCartContent);
     _listen(this.result);
   }
 });

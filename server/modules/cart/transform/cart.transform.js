@@ -2,7 +2,6 @@ var _ = require('lodash');
 
 module.exports = {
   getCartTransform: (response) => {
-    //console.log(response);
     var cartContent = {
       cartContentElements: {}
     };
@@ -15,7 +14,7 @@ module.exports = {
 
         cartContent.cartContentElements[pid] = {};
         cartContent.cartContentElements[pid].pid = pid;
-        cartContent.cartContentElements[pid].id = item.cartContentId;
+        cartContent.cartContentElements[pid].id = id;
       }
     }
 

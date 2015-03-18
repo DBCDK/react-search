@@ -9,13 +9,23 @@ module.exports = function(dispatcher) {
   });
 
   dispatcher.listen('addCartContent', (data, connection) => {
-    var cartContent = {
+    let cartContent = {
       cartContent: {
         cartContentElement: data
       }
     };
     OpenUserInfo.cart.addCartContent(cartContent)
       .then((result) => connection.emit('addCartContentResult', result.cartContentId));
+  });
+
+  dispatcher.listen('removeCartContent', (data, connection) => {
+    let cartContent = {
+      cartContent: {
+        cartContentId: data
+      }
+    };
+    OpenUserInfo.cart.removeCartContent(cartContent)
+      .then((result) => connection.emit('removeCartContentResult', result));
   });
 };
 

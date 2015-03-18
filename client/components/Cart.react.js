@@ -10,8 +10,9 @@ var Cart = React.createClass({
   _updateState: function(_store) {
     var cart = _store.cart;
     var state = this.state;
+    state.pending = _store.pending;
 
-    if(!_.isUndefined(cart[state.pid])){
+    if(!_.isUndefined(cart[state.pid])) {
       state.inCart = true;
       state.cartId = cart[state.pid].id;
     }
@@ -38,17 +39,17 @@ var Cart = React.createClass({
     this.setState(state);
 
     if(inCart) {
-      //TODO mmj remove from cart
-      console.log(this.state);
+      Actions.removeCartContent(state.cartId, state.pid);
     }
     else {
-      Actions.addCartContent(this.state.pid);
+      Actions.addCartContent(state.pid);
     }
   },
 
   render: function() {
-    var value = (this.state.inCart) ? 'Remove from cart' : 'Add to cart';
-    return <input type='button' value={value} onClick={this.onClick}/>;
+    let value = (this.state.inCart) ? 'Remove from cart' : 'Add to cart';
+    var disabled = this.state.pending;
+    return <input type='button' value={value} onClick={this.onClick} disabled={disabled} />;
   }
 });
 

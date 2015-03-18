@@ -14,7 +14,8 @@ var options = {
 module.exports = {
   cart: {
     getCart: (user) => openUserinfo.request('getCart', {userId: user}, options, true),
-    addCartContent: (content) => openUserinfo.request('addCartContent', content, options, true)
+    addCartContent: (content) => openUserinfo.request('addCartContent', content, options, true),
+    removeCartContent: (content) => openUserinfo.request('removeCartContent', content, options, true)
   },
   user : {
     login : (user) => openUserinfo.request('login', {userId: user.name, userPinCode : user.password}, options)
