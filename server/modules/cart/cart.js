@@ -10,16 +10,12 @@ module.exports = function(dispatcher) {
 
   dispatcher.listen('addCartContent', (data, connection) => {
     var cartContent = {
-      cartContent:{
+      cartContent: {
         cartContentElement: data
       }
     };
-    console.log(cartContent);
     OpenUserInfo.cart.addCartContent(cartContent)
-    .then(function(result){
-        console.log(result);});
-     //.then(Transform.getCartTransform)
-     //.then((result) => connection.emit('cartResult', result));
+      .then((result) => connection.emit('addCartContentResult', result.cartContentId));
   });
 };
 

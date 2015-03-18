@@ -2,14 +2,20 @@ var React = require('react');
 var CartStore = require('../stores/Cart.store');
 var Actions = require('../actions/Actions');
 var Reflux = require('reflux');
+var _ = require('lodash');
 
 var Cart = React.createClass({
   mixins: [Reflux.ListenerMixin],
 
   _updateState: function(_store) {
-    var cartContent = _store.cart;
+    var cart = _store.cart;
     var state = this.state;
-    state.inCart = (cartContent.indexOf(state.pid) != -1);
+
+    if(!_.isUndefined(cart[state.pid])){
+      state.inCart = true;
+      state.cartId = cart[state.pid].id;
+    }
+
     this.setState(state);
   },
 
@@ -33,6 +39,7 @@ var Cart = React.createClass({
 
     if(inCart) {
       //TODO mmj remove from cart
+      console.log(this.state);
     }
     else {
       Actions.addCartContent(this.state.pid);
