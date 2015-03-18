@@ -8,7 +8,8 @@
 
 var session = require('express-session'),
     passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
+    openUserInfo = require('./clients/OpenUserinfo.client');
 
 module.exports = function(app) {
     app.use(session({
@@ -20,13 +21,32 @@ module.exports = function(app) {
     app.use(passport.session());
 
 passport.use(new LocalStrategy({
+    passReqToCallback : true,
     usernameField: 'username',
     passwordField: 'password'
   },
-  function(username, password, done) {
+  function(req, username, password, done) {
+    var credentials = {name : username, password : password}
+    openUserInfo.user.login(credentials)
+    .then((result) => {
+      if (result.userId) {
+        console.log('hep hep');
+         req.session.success = 'You are successfully logged in with ' + result.userId;
+         done (null, result);
+      }
+      else if (result.error){
+        req.session.error = result.error;
+        done (null, null);
+      }
+    })
+    .catch((error) => console.log);
     console.log('hest');
   }
 ));
+
+function parseUserResult(data) {
+  console.log(data, 'data');
+}
 
     // Session-persisted message middleware
 app.use(function(req, res, next){
@@ -45,7 +65,16 @@ app.use(function(req, res, next){
   next();
 });
 
+//===============PASSPORT=================
+// Passport session setup.
+passport.serializeUser(function(user, done) {
+  console.log("serializing " + user.userId);
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  console.log("deserializing " + obj);
+  done(null, obj);
+});
+
 }
-
-//passport.use('local-signin', () => console.log);
-

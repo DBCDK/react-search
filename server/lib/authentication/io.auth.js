@@ -1,10 +1,8 @@
 var expressSession = require('express-session');
 var sessionStore = expressSession({
-    name: "COOKIE_NAME_HERE",
-    secret: 'keyboard cat',
-    resave: false,
+    secret: 'supernova',
     saveUninitialized: true,
-    cookie: { secure: true }
+    resave: true
   });
 var cookieParser = require('cookie-parser');
 var passportSocketIo = require("passport.socketio");
