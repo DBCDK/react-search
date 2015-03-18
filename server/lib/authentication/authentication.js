@@ -5,18 +5,23 @@
  * inspired by:
  * https://orchestrate.io/blog/2014/06/26/build-user-authentication-with-node-js-express-passport-and-orchestrate/
  */
-
-var session = require('express-session'),
+var expressSession = require('express-session'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     openUserInfo = require('./clients/OpenUserinfo.client');
 
-module.exports = function(app, session) {
+module.exports = function(app) {
+  var session = expressSession({
+      name : 'testhest',
+        secret: 'supernova',
+        saveUninitialized: true,
+        resave: true
+    }),
     app.use(session);
     app.use(passport.initialize());
     app.use(passport.session());
 
-passport.use(new LocalStrategy({
+  passport.use(new LocalStrategy({
     passReqToCallback : true,
     usernameField: 'username',
     passwordField: 'password'

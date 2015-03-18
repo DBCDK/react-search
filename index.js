@@ -3,13 +3,7 @@ require("babel/register");
 
 // Import dependencies
 var express = require('express'),
-    express_session = require('express-session'),
-    session = express_session({
-      name : 'testhest',
-        secret: 'supernova',
-        saveUninitialized: true,
-        resave: true
-    }),
+    io = require('socket.io');
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
@@ -17,7 +11,8 @@ var express = require('express'),
     exphbs  = require('express-handlebars'),
     routes = require('./routes/routes'),
     app = express(),
-
+    server = app.createServer(),
+    socket = io(server);
     authentication = require('./server/lib/authentication')(app, session),
     server = app.listen(3000),
     handlebars_helpers = require('./lib/handlebars/helpers');

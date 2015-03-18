@@ -1,6 +1,3 @@
-var socketIo = require('socket.io');
-var authentication = require('./authentication/io.auth.js');
-
 /**
  * Contains all eventlisteners that should be instantiated on new connections
  * @type {Array}
@@ -14,10 +11,10 @@ var _connections = new Array();
  *
  * @param {[Object]} server a node http server is needed to initialize socket.io
  */
-function Dispatcher(app, session) {
-  var socketServer = socketIo(app);
-  authentication(socketServer, session);
-  socketServer.on('connection', makeConnection);
+function Dispatcher(io) {
+  //var socketServer = socketIo(app);
+  //authentication(socketServer, session);
+  io.on('connection', makeConnection);
 
   /**
    * Callback method for new connections
