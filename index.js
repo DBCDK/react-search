@@ -11,12 +11,12 @@ var express = require('express'),
     exphbs  = require('express-handlebars'),
     routes = require('./routes/routes'),
     app = express(),
-    server = app.createServer(),
-    socket = io(server);
-    authentication = require('./server/lib/authentication')(app, session),
     server = app.listen(3000),
+    socket = io(server);
+    authentication = require('./server/lib/authentication/authentication')(app, io),
+
     handlebars_helpers = require('./lib/handlebars/helpers');
-    modules = require('./server')(server, session);
+    modules = require('./server')(socket);
 
 // Setup express env
 app.set('port', process.env.PORT || 3000);

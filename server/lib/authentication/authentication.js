@@ -8,7 +8,7 @@
 var expressSession = require('express-session'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
-    openUserInfo = require('./clients/OpenUserinfo.client');
+    openUserInfo = require('../clients/OpenUserinfo.client');
 
 module.exports = function(app) {
   var session = expressSession({
@@ -16,7 +16,7 @@ module.exports = function(app) {
         secret: 'supernova',
         saveUninitialized: true,
         resave: true
-    }),
+    });
     app.use(session);
     app.use(passport.initialize());
     app.use(passport.session());

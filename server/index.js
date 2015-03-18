@@ -1,6 +1,6 @@
-module.exports = function (server, session) {
+module.exports = function (io) {
   //initiate dispatcher
-  var dispatcher = require('./lib/dispatcher')(server, session);
+  var dispatcher = require('./lib/dispatcher')(io);
   ///Load Modules
   require('./modules/login/login.module.js')(dispatcher);
   require('./modules/search/search.js')(dispatcher);

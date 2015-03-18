@@ -59,7 +59,6 @@ function Dispatcher(io) {
   return {
     listen: addListener,
     emitToUser : emitToUser,
-    io : socketServer
   }
 }
 
