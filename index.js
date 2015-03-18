@@ -3,6 +3,13 @@ require("babel/register");
 
 // Import dependencies
 var express = require('express'),
+    express_session = require('express-session'),
+    session = express_session({
+      name : 'testhest',
+        secret: 'supernova',
+        saveUninitialized: true,
+        resave: true
+    }),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
@@ -10,10 +17,11 @@ var express = require('express'),
     exphbs  = require('express-handlebars'),
     routes = require('./routes/routes'),
     app = express(),
-    authentication = require('./server/lib/authentication')(app),
-    server = require('http').Server(app),
+
+    authentication = require('./server/lib/authentication')(app, session),
+    server = app.listen(3000),
     handlebars_helpers = require('./lib/handlebars/helpers');
-    modules = require('./server')(server);
+    modules = require('./server')(server, session);
 
 // Setup express env
 app.set('port', process.env.PORT || 3000);
@@ -70,6 +78,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-server.listen(app.get('port'), function () {
+/*server.listen(app.get('port'), function () {
     console.log('express-handlebars example server listening on ' + app.get('port'));
-});
+});*/

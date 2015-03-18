@@ -1,15 +1,9 @@
-var expressSession = require('express-session');
-var sessionStore = expressSession({
-    secret: 'supernova',
-    saveUninitialized: true,
-    resave: true
-  });
-var cookieParser = require('cookie-parser');
 var passportSocketIo = require("passport.socketio");
+var cookieParser = require('cookie-parser')
 
-module.exports = function (io) {
+
+module.exports = function (io, sessionStore) {
   io.use(function(socket, next){
-    socket.user = {};
     sessionStore(socket.request, {}, next);
   })
 }

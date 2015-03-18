@@ -14,13 +14,9 @@ var _connections = new Array();
  *
  * @param {[Object]} server a node http server is needed to initialize socket.io
  */
-function Dispatcher(server) {
-  var socketServer = socketIo.listen(server);
-  authentication(socketServer);
-  /*socketServer.use(authentication({
-    encrypt_key: "crypt", // Add any key for encrypting data
-    validate_key: "sign" // Add any key for signing data
-  }));*/
+function Dispatcher(app, session) {
+  var socketServer = socketIo(app);
+  authentication(socketServer, session);
   socketServer.on('connection', makeConnection);
 
   /**
@@ -29,7 +25,7 @@ function Dispatcher(server) {
    * @return {null}
    */
   function makeConnection(connection) {
-    _connections.push(connection);
+    console.log(connection.request.session, 'session on connection');
     _listeners.map(listener => {
       connection.on(listener.type, (data) => {
         listener.callback(data, connection);

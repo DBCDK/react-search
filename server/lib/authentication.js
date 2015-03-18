@@ -11,12 +11,8 @@ var session = require('express-session'),
     LocalStrategy = require('passport-local').Strategy,
     openUserInfo = require('./clients/OpenUserinfo.client');
 
-module.exports = function(app) {
-    app.use(session({
-        secret: 'supernova',
-        saveUninitialized: true,
-        resave: true
-    }));
+module.exports = function(app, session) {
+    app.use(session);
     app.use(passport.initialize());
     app.use(passport.session());
 
@@ -30,7 +26,6 @@ passport.use(new LocalStrategy({
     openUserInfo.user.login(credentials)
     .then((result) => {
       if (result.userId) {
-        console.log('hep hep');
          req.session.success = 'You are successfully logged in with ' + result.userId;
          done (null, result);
       }
@@ -40,13 +35,8 @@ passport.use(new LocalStrategy({
       }
     })
     .catch((error) => console.log);
-    console.log('hest');
   }
 ));
-
-function parseUserResult(data) {
-  console.log(data, 'data');
-}
 
     // Session-persisted message middleware
 app.use(function(req, res, next){
