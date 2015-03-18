@@ -11,31 +11,40 @@ function _listen(callback) {
   Socket.on('cartResult', (data) => callback(data));
 }
 
-function _cartRequest(){
+function _cartRequest() {
+  console.log('cartRequest');
   Socket.emit('cartRequest', 'mmj@dbc.dk');
 }
 
 var CartStore = Reflux.createStore({
-  getState: function(){
+  getState: function() {
     return _store;
   },
 
-  request: function(){
-    if(!_store.pending){
+  request: function() {
+    console.log('request', _store);
+    if(!_store.pending) {
       _cartRequest();
       _store.pending = true;
       this.trigger(_store);
     }
   },
 
-  result: function(result){
+  result: function(result) {
+    console.log(result);
     _store.pending = false;
     _store.cart = result;
     this.trigger(_store);
   },
 
-  init: function(){
-    this.listenTo(Actions.cart, this.request);
+  addCartContent: function(pid) {
+    console.log(pid);
+    Socket.emit('addCartContent', pid);
+  },
+
+  init: function() {
+    this.listenTo(Actions['getCart'], this.request);
+    this.listenTo(Actions['addCartContent'], this.addCartContent);
     _listen(this.result);
   }
 });

@@ -18,7 +18,7 @@ var Cart = React.createClass({
   },
 
   componentWillMount: function() {
-    Actions.cart(this.state.pid);
+    Actions.getCart();
   },
 
   componentDidMount: function() {
@@ -27,8 +27,16 @@ var Cart = React.createClass({
 
   onClick: function() {
     var state = this.state;
-    state.inCart = !state.inCart;
+    var inCart = state.inCart;
+    state.inCart = !inCart;
     this.setState(state);
+
+    if(inCart) {
+      //TODO mmj remove from cart
+    }
+    else {
+      Actions.addCartContent(this.state.pid);
+    }
   },
 
   render: function() {
