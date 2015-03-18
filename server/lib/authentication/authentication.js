@@ -25,8 +25,10 @@ module.exports = function(app) {
     passReqToCallback : true,
     usernameField: 'username',
     passwordField: 'password'
-  },
-  function(req, username, password, done) {
+  }, login));
+}
+
+function login(req, username, password, done) {
     var credentials = {name : username, password : password}
     openUserInfo.user.login(credentials)
     .then((result) => {
@@ -41,24 +43,6 @@ module.exports = function(app) {
     })
     .catch((error) => console.log);
   }
-));
-
-    // Session-persisted message middleware
-app.use(function(req, res, next){
-  var err = req.session.error,
-      msg = req.session.notice,
-      success = req.session.success;
-
-  delete req.session.error;
-  delete req.session.success;
-  delete req.session.notice;
-
-  if (err) res.locals.error = err;
-  if (msg) res.locals.notice = msg;
-  if (success) res.locals.success = success;
-
-  next();
-});
 
 //===============PASSPORT=================
 // Passport session setup.
@@ -71,5 +55,3 @@ passport.deserializeUser(function(obj, done) {
   console.log("deserializing " + obj);
   done(null, obj);
 });
-
-}
