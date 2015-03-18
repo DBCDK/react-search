@@ -13,7 +13,7 @@ var memoryCache = cacheManager.caching({store: 'memory', max: 100, ttl: 100});
 
 var BaseClient = {};
 BaseClient.config = config;
-BaseClient.client = function (wsdl, config, cache) {
+BaseClient.client = function(wsdl, config, cache) {
   var _soapclient;
 
   /**
@@ -23,13 +23,13 @@ BaseClient.client = function (wsdl, config, cache) {
    */
   function _client(wsdl, options) {
     return new Promise((resolve, reject) => {
-      if (_soapclient) {
+      if(_soapclient) {
         resolve(_soapclient);
       }
       // Create soap client from a given wsdl
       soap.createClient(wsdl, options, (err, client) => {
         // Resolve promise from result
-        if (err) {
+        if(err) {
           reject(err)
         }
         else {
@@ -47,21 +47,34 @@ BaseClient.client = function (wsdl, config, cache) {
    * @param  {Object} options Options for request
    * @return {Promise}
    */
-  function _action(client, op, options) {
+  function _action(client, op, options, ignoreCache) {
     return new Promise((resolve, reject) => {
       // Call to service is wrapped by the cache manager
       // that handles caching auto-magically
       var query = util._extend({}, options);
-      _actionWithCache(client[op], query, (err, result) => {
+
+      if(ignoreCache) {
+        _actionWithoutCache(client[op], query, (err, result) => {
           (err) ? reject(err) : resolve(result);
         });
+      }
+      else {
+        _actionWithCache(client[op], query, (err, result) => {
+          (err) ? reject(err) : resolve(result);
+        });
+      }
     });
   }
+
   function _actionWithCache(call, options, callback) {
-      var cachekey = JSON.stringify(options);
-      memoryCache.wrap(cachekey, (cb) => {
-          call(options, cb);
-        }, callback);
+    var cachekey = JSON.stringify(options);
+    memoryCache.wrap(cachekey, (cb) => {
+      call(options, cb);
+    }, callback);
+  }
+
+  function _actionWithoutCache(call, options, callback) {
+    call(options, callback);
   }
 
   /**
@@ -69,13 +82,14 @@ BaseClient.client = function (wsdl, config, cache) {
    * @param  {String} action  Type of request
    * @param  {Object} params map of params
    * @param  {Object} opt map of extra options i.e. alternative endpoint
+   * @param  {boolean} ignoreCache flag that indicates if the call should be cached.
    * @return {Promise}
    */
-  function call(action, params, opt) {
+  function call(action, params, opt, ignoreCache) {
     let options = opt || {};
-    return _client(wsdl, options).then(function (client) {
+    return _client(wsdl, options).then(function(client) {
       var o = util._extend(config, params);
-      return _action(client, action, o);
+      return _action(client, action, o, ignoreCache);
     });
   }
 
