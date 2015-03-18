@@ -1,5 +1,5 @@
 var transform = require('./transform/dkabm.js');
-var opensearch = require('./client/OpenSearch.client');
+var opensearch = require('../../lib/clients/OpenSearch.client');
 
 module.exports = function (dispatcher) {
   dispatcher.listen('searchRequest', (data, connection) => {

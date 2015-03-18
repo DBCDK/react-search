@@ -1,4 +1,4 @@
-var OpenUserInfo = require('./client/OpenUserinfo.client');
+var OpenUserInfo = require('../../lib/clients/OpenUserinfo.client');
 var Transform = require('./transform/cart.transform');
 
 module.exports = function(dispatcher) {

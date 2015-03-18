@@ -1,4 +1,4 @@
-var baseclient = require('../../../lib/Base.client');
+var baseclient = require('./Base.client');
 var config = baseclient.config.openuserinfo;
 
 var _default = {

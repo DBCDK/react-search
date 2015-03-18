@@ -1,4 +1,4 @@
-var baseclient = require('../../../lib/Base.client'),
+var baseclient = require('./Base.client'),
   config = baseclient.config.moreinfo,
   _default = {
     authentication: {

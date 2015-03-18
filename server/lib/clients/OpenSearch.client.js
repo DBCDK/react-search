@@ -1,4 +1,4 @@
-var baseclient = require('../../../lib/base.client'),
+var baseclient = require('./Base.client'),
     config = baseclient.config.opensearch;
 
 var _default = {

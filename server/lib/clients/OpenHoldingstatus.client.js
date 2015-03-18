@@ -1,4 +1,4 @@
-var baseclient = require('../../../lib/Base.client'),
+var baseclient = require('./Base.client'),
   config = baseclient.config.openholdingstatus,
   _default = {},
   openHoldingsstatus = baseclient.client(config.wsdl, _default);

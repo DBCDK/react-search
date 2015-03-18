@@ -6,7 +6,7 @@
 
 var soap = require('soap');
 var util = require('util');
-var config = require('../../config.js');
+var config = require('../../../config.js');
 var Promise = require('es6-promise').Promise;
 var cacheManager = require('cache-manager');
 var memoryCache = cacheManager.caching({store: 'memory', max: 100, ttl: 100});

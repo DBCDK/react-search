@@ -1,5 +1,5 @@
 var transform = require('./transform/transformHoldings.js');
-var openHoldingstatus = require('./client/OpenHoldingstatus.client');
+var openHoldingstatus = require('../../lib/clients/OpenHoldingstatus.client');
 var _dispatcher;
 
 module.exports = function (dispatcher) {

@@ -1,5 +1,5 @@
 var transform = require('./transform/transformImages.js');
-var moreinfo = require('./client/moreinfo.client');
+var moreinfo = require('../../lib/clients/moreinfo.client');
 var _dispatcher;
 
 module.exports = function(dispatcher) {
