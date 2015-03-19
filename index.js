@@ -3,7 +3,7 @@ require("babel/register");
 
 // Import dependencies
 var express = require('express'),
-    io = require('socket.io');
+    io = require('socket.io'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
@@ -12,7 +12,7 @@ var express = require('express'),
     routes = require('./routes/routes'),
     app = express(),
     server = require('http').Server(app),
-    socket = io(server);
+    socket = io(server),
     authentication = require('./server/modules/authentication/authentication'),
     handlebars_helpers = require('./lib/handlebars/helpers');
     modules = require('./server')(socket);
