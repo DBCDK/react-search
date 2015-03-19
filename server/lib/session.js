@@ -1,9 +1,10 @@
 var expressSession = require('express-session');
+var config = require('../../config').session;
 var session = expressSession({
-      name : 'testhest', //remember to change
-        secret: 'supernova', //remember to change
-        saveUninitialized: true,
-        resave: true
+      name : config.name,
+      secret: config.secret,
+      saveUninitialized: true,
+      resave: true
     });
 
 module.exports = session;
