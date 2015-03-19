@@ -13,7 +13,7 @@ function _listen(callback) {
 }
 
 function _cartRequest() {
-  Socket.emit('cartRequest', 'mmj@dbc.dk');
+  Socket.emit('cartRequest');
 }
 
 var CartStore = Reflux.createStore({

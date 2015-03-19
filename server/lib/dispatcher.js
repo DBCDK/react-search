@@ -1,3 +1,5 @@
+var session = require('./session');
+
 /**
  * Contains all eventlisteners that should be instantiated on new connections
  * @type {Array}
@@ -22,10 +24,10 @@ function Dispatcher(io) {
    * @return {null}
    */
   function makeConnection(connection) {
-    console.log(connection.request.session, 'session on connection');
+    var user = connection.request.session.passport && connection.request.session.passport.user || null;
     _listeners.map(listener => {
       connection.on(listener.type, (data) => {
-        listener.callback(data, connection);
+        listener.callback(data, connection, user);
       });
     });
   }

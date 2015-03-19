@@ -18,10 +18,7 @@ var UserStore = Reflux.createStore({
     .send(data)
     .end(function (response) {
       if (response.body && response.body.userId) {
-        _store = {
-          user : true,
-          error : null
-        };
+        window.location.reload();
       }
       else {
         _store = {
@@ -37,10 +34,7 @@ var UserStore = Reflux.createStore({
     var self = this;
     request
     .get('/logout').end(function () {
-        _store = {
-          user : false
-        }
-        self.trigger(_store);
+       window.location.reload();
     });
   },
 
