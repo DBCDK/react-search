@@ -15,6 +15,17 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
   res.send(req.session.passport.user);
 });
 
+// sends the request through our local login/signin strategy
+router.get('/logout', (req, res) => {
+  req.logout();
+  req.session.notice = "You have successfully been logged out";
+  res.send({
+   user : false,
+   error : null
+  });
+
+});
+
 
 // Fallback route : redirect non-targeted routes to /search/
 router.get('*', (req, res) => res.redirect('/search/'));

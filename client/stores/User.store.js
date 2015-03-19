@@ -34,6 +34,14 @@ var UserStore = Reflux.createStore({
   },
 
   logout: function(){
+    var self = this;
+    request
+    .get('/logout').end(function () {
+        _store = {
+          user : false
+        }
+        self.trigger(_store);
+    });
   },
 
   init: function(){

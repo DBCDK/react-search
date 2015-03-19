@@ -34,11 +34,11 @@ function _login(req, username, password, done) {
     openUserInfo.user.login(credentials)
     .then((result) => {
       if (result.userId) {
-         req.session.success = 'You are successfully logged in with ' + result.userId;
+         req.session.notice = 'You are successfully logged in with ' + result.userId;
          done (null, result);
       }
       else if (result.error){
-        req.session.error = result.error;
+        req.session.notice = result.error;
         done (null, null);
       }
     })
