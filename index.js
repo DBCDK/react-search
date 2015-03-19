@@ -11,12 +11,15 @@ var express = require('express'),
     exphbs  = require('express-handlebars'),
     routes = require('./routes/routes'),
     app = express(),
-    server = app.listen(3000),
+    server = require('http').Server(app),
     socket = io(server);
-    authentication = require('./server/lib/authentication/authentication')(app, io),
-
+    authentication = require('./server/modules/authentication/authentication'),
     handlebars_helpers = require('./lib/handlebars/helpers');
     modules = require('./server')(socket);
+
+// Initialize authentication
+authentication.express(app);
+authentication.io(socket);
 
 // Setup express env
 app.set('port', process.env.PORT || 3000);
@@ -73,6 +76,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-/*server.listen(app.get('port'), function () {
-    console.log('express-handlebars example server listening on ' + app.get('port'));
-});*/
+server.listen(app.get('port'), function () {
+    console.log('Server listening on ' + app.get('port'));
+});

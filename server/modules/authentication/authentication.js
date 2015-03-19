@@ -8,27 +8,28 @@
 var expressSession = require('express-session'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
-    openUserInfo = require('../clients/OpenUserinfo.client');
+    openUserInfo = require('../../lib/clients/OpenUserinfo.client');
 
-module.exports = function(app) {
-  var session = expressSession({
-      name : 'testhest',
-        secret: 'supernova',
+var session = expressSession({
+      name : 'testhest', //remember to change
+        secret: 'supernova', //remember to change
         saveUninitialized: true,
         resave: true
     });
+
+module.exports.express = function(app) {
     app.use(session);
     app.use(passport.initialize());
     app.use(passport.session());
-
-  passport.use(new LocalStrategy({
-    passReqToCallback : true,
-    usernameField: 'username',
-    passwordField: 'password'
-  }, login));
 }
 
-function login(req, username, password, done) {
+module.exports.io = function(io) {
+  io.use(function(socket, next){
+    session(socket.request, {}, next);
+  });
+}
+
+function _login(req, username, password, done) {
     var credentials = {name : username, password : password}
     openUserInfo.user.login(credentials)
     .then((result) => {
@@ -45,13 +46,17 @@ function login(req, username, password, done) {
   }
 
 //===============PASSPORT=================
+passport.use(new LocalStrategy({
+    passReqToCallback : true,
+    usernameField: 'username',
+    passwordField: 'password'
+  }, _login)
+);
 // Passport session setup.
 passport.serializeUser(function(user, done) {
-  console.log("serializing " + user.userId);
   done(null, user);
 });
 
 passport.deserializeUser(function(obj, done) {
-  console.log("deserializing " + obj);
   done(null, obj);
 });
