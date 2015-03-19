@@ -18,11 +18,16 @@ var UserStore = Reflux.createStore({
     .send(data)
     .end(function (response) {
       if (response.body && response.body.userId) {
-        _store.user = true;
+        _store = {
+          user : true,
+          error : null
+        };
       }
       else {
-       _store.user = false;
-       _store.error = 'Brugernavn eller password ugyldigt';
+        _store = {
+          user : false,
+          error : 'Brugernavn eller password ugyldigt'
+        }
       }
       self.trigger(_store);
     });
