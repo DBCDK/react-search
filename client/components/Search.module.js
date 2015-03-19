@@ -3,6 +3,7 @@ var _ = require('lodash'),
     Reflux = require('reflux'),
     Router = require('react-router'),
     SearchStore = require('../stores/SearchStore'),
+    UserStore = require('../stores/User.store'),
     Actions = require('../actions/Actions'),
     CqlGenerator = require('../utils/CqlGenerator'),
     SearchField = require('../components/SearchField'),
@@ -40,7 +41,8 @@ var SearchModule = React.createClass({
   },
   getInitialState: function() {
     let state = {
-      query: this.getParams().path || null
+      query: this.getParams().path || null,
+      user : UserStore.getState().user
     };
     return _.extend(SearchStore.getState(), state);
   },
@@ -52,6 +54,9 @@ var SearchModule = React.createClass({
   componentDidMount: function() {
     this.listenTo(SearchStore, () => {
       this.setState(SearchStore.getState());
+    });
+    this.listenTo(UserStore, (store) => {
+      this.setState({user : store.user});
     });
   },
   _onSubmit : function (value) {
@@ -73,6 +78,7 @@ var SearchModule = React.createClass({
         buttonValue='Søg'
       />
       <SearchResult
+        user={this.state.user}
         query={this.state.query}
         result={this.state.result}
         pending={this.state.pending}

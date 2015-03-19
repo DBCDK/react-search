@@ -4,18 +4,17 @@ var React = require('react/addons'),
     Message = require('./Message');
 
 var SearchResult = React.createClass({
-  _result: function (result, query) {
-    if (!result) {
+  _result: function (props) {
+    if (!props.result) {
       return null;
     }
-    if (result.length) {
-      return result.map((work, i) => {
-        let holdings = {status : 'home', text : 'tilgængelig på biblioteket'}
-        return (<Work key={i} element={work} />);
+    if (props.result.length) {
+      return props.result.map((work, i) => {
+        return (<Work key={i} element={work} user={props.user} />);
       });
     }
     else {
-      return (<Message type={Message.types.WARNING} message={'Øv ingen resultater på søgningen ' + query} />);
+      return (<Message type={Message.types.WARNING} message={'Øv ingen resultater på søgningen ' + props.query} />);
     }
   },
   render: function() {
@@ -28,7 +27,7 @@ var SearchResult = React.createClass({
      return (
       <div ref="SearchResult" className={classes}>
       <Loader loaded={!this.props.pending} />
-        {this._result(this.props.result, this.props.query)}
+        {this._result(this.props)}
       </div>
       );
    }

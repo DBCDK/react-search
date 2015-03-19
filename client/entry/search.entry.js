@@ -11,7 +11,6 @@ var routes = (
   <Route handler={SearchModule} path="/search/">
     <Route handler={SearchModule} name="search" path=":path" />
   </Route>
-
 );
 
 Router.run(routes, Router.HistoryLocation, (Handler) => {

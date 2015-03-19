@@ -18,8 +18,8 @@ var Work = React.createClass({
       <Frontpage pid={element.id} size="detail_207"/>
       <div className='element author'>{ (element.creator.length) ? 'af ' + _mapElement(element.creator[0]) : ''}</div>
       <div className='element abstract'>{ element.abstract }</div>
-      <Holdings pid={element.id} />
-      <Cart pid={element.id} />
+      { this.props.user && (<Holdings pid={element.id} />) }
+      { this.props.user && (<Cart pid={element.id} />) }
      </div>
     );
   }
