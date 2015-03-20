@@ -13,9 +13,12 @@ var express = require('express'),
   app = express(),
   server = require('http').Server(app),
   socket = io(server),
-  authentication = require('./services/modules/authentication/authentication'),
+  authentication = require('./lib/authentication/authentication'),
   handlebars_helpers = require('./lib/handlebars/helpers'),
-  modules = require('./services/api')(socket);
+  services = require('dbc-node-services');
+
+//Initialize api
+services.init(socket);
 
 // Initialize authentication
 authentication.express(app);
