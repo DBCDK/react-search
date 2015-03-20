@@ -13,10 +13,16 @@ var _connections = new Array();
  *
  * @param {[Object]} server a node http server is needed to initialize socket.io
  */
-function Dispatcher(io) {
-  //var socketServer = socketIo(app);
-  //authentication(socketServer, session);
-  io.on('connection', makeConnection);
+function Dispatcher() {
+
+  /**
+   * Initialize dispatcher with a socket.io server
+   * @param  {IoSocketServer} io instance of socket.io
+   * @return {null}
+   */
+  function init (io) {
+    io.on('connection', makeConnection);
+  }
 
   /**
    * Callback method for new connections
@@ -59,8 +65,9 @@ function Dispatcher(io) {
 
   // Return factory, with a method for adding an event listener
   return {
+    init : init,
     listen: addListener,
-    emitToUser : emitToUser,
+    emitToUser : emitToUser
   }
 }
 

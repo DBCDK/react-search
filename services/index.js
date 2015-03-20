@@ -1,6 +1,8 @@
+var dispatcher = require('./lib/dispatcher')();
+
 module.exports = function (io) {
   //initiate dispatcher
-  var dispatcher = require('./lib/dispatcher')(io);
+  dispatcher.init(io);
   ///Load Modules
   require('./modules/search/search.js')(dispatcher);
   require('./modules/holdingstatus/holdings.js')(dispatcher);
