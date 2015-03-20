@@ -7,11 +7,11 @@ var _store = {
 }
 
 function _listen(cb) {
-  socket.on('holdingsResult', (data) => cb(data));
+  socket.on('getHoldingsResponse', (data) => cb(data));
 }
 
 function _holdingsRequest(pid) {
-  socket.emit('holdingsRequest', {
+  socket.emit('getHoldingsRequest', {
     pid: pid,
     responderId : '714700'
   });

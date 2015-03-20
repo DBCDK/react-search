@@ -9,7 +9,7 @@ var _store = {
 }
 
 function _listen(cb) {
-  socket.on('searchResult', (data) => cb(data));
+  socket.on('searchResponse', (data) => cb(data));
 }
 
 function _socketSearch(query) {

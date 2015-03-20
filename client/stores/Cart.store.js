@@ -9,7 +9,7 @@ var _store = {
 };
 
 function _listen(callback) {
-  Socket.on('cartResult', (data) => callback(data));
+  Socket.on('cartResponse', (data) => callback(data));
 }
 
 function _cartRequest() {
@@ -44,14 +44,14 @@ var CartStore = Reflux.createStore({
   },
 
   addCartContent: function(pid) {
-    Socket.once('addCartContentResult', (data) => this.addCartContentResult(data, pid));
-    Socket.emit('addCartContent', pid);
+    Socket.once('addCartContentResponse', (data) => this.addCartContentResult(data, pid));
+    Socket.emit('addCartContentRequest', pid);
   },
 
   removeCartContent: function(cartId, pid) {
     if(cartId) {
-      Socket.once('removeCartContentResult', (data) => this.removeCartContentResult(data, pid));
-      Socket.emit('removeCartContent', cartId);
+      Socket.once('removeCartContentResponse', (data) => this.removeCartContentResult(data, pid));
+      Socket.emit('removeCartContentRequest', cartId);
     }
   },
 

@@ -20,7 +20,7 @@ function Dispatcher() {
    * @param  {IoSocketServer} io instance of socket.io
    * @return {null}
    */
-  function init (io) {
+  function init(io) {
     io.on('connection', makeConnection);
   }
 
@@ -32,8 +32,12 @@ function Dispatcher() {
   function makeConnection(connection) {
     var user = connection.request.session.passport && connection.request.session.passport.user || null;
     _listeners.map(listener => {
-      connection.on(listener.type, (data) => {
-        listener.callback(data, connection, user);
+      connection.on(listener.type + 'Request', (data) => {
+        console.log(listener.type);
+        listener.callback(data, user)
+          .then((data) => {
+            connection.emit(listener.type + 'Response', data);
+          });
       });
     });
   }
@@ -65,9 +69,9 @@ function Dispatcher() {
 
   // Return factory, with a method for adding an event listener
   return {
-    init : init,
+    init: init,
     listen: addListener,
-    emitToUser : emitToUser
+    emitToUser: emitToUser
   }
 }
 

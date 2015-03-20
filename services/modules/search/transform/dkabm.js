@@ -24,5 +24,6 @@ module.exports = function(result) {
     }]
   };
 
-  return transform(result, template);
+  var transformed = transform(result, template);
+  return transformed;
 };

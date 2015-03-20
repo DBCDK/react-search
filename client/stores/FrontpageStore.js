@@ -6,11 +6,11 @@ var _store = {
 }
 
 function _listen(cb) {
-  socket.on('frontpageResult', (data) => cb(data));
+  socket.on('getImagesResponse', (data) => cb(data));
 }
 
 function _frontpageRequest(pid) {
-  socket.emit('frontpageRequest', {
+  socket.emit('getImagesRequest', {
     pid: pid,
   });
 }

@@ -9,7 +9,7 @@
     "start:watch": "webpack --progress --colors --watch -d",
     "css:watch": "node-sass -w -o public --include-path style/components --output-style compressed --source-map public/main.css.map  style/main.scss main.css",
     "css:build": "node-sass -o public --include-path style/components --output-style compressed style/main.scss main.css",
-    "serve": "supervisor -w client,views,lib,routes,server index.js",
+    "serve": "supervisor -w client,views,lib,routes,services index.js",
     "build": "webpack --progress --colors --optimize-minimize",
     "dev": "parallelshell \"npm run serve -s\" \"npm run css:build\" \"npm run start:watch -s\" \"npm run css:watch -s\""
   },

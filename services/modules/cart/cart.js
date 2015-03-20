@@ -1,33 +1,30 @@
 var OpenUserInfo = require('../../lib/clients/OpenUserinfo.client');
 var Transform = require('./transform/cart.transform');
 
-module.exports = function(dispatcher) {
-  dispatcher.listen('cartRequest', (data, connection, user) => {
-    OpenUserInfo.cart.getCart(user.userId)
-      .then(Transform.getCartTransform)
-      .then((result) => connection.emit('cartResult', result));
-  });
+module.exports.getCart = function(data, user) {
 
-  dispatcher.listen('addCartContent', (data, connection, user) => {
+    return OpenUserInfo.cart.getCart(user.userId)
+        .then(Transform.getCartTransform)
+}
+
+module.exports.addCartContent = function(data, user) {
     let cartContent = {
-      cartContent: {
-        cartContentElement: data
-      },
-      userId : user.userId
+        cartContent: {
+            cartContentElement: data
+        },
+        userId: user.userId
     };
-    OpenUserInfo.cart.addCartContent(cartContent)
-      .then((result) => connection.emit('addCartContentResult', result.cartContentId));
-  });
 
-  dispatcher.listen('removeCartContent', (data, connection, user) => {
+    return OpenUserInfo.cart.addCartContent(cartContent);
+}
+
+module.exports.removeCartContent = function(data, user) {
     let cartContent = {
-      cartContent: {
-        cartContentId: data
-      },
-      userId : user.userId
+        cartContent: {
+            cartContentId: data
+        },
+        userId: user.userId
     };
-    OpenUserInfo.cart.removeCartContent(cartContent)
-      .then((result) => connection.emit('removeCartContentResult', result));
-  });
-};
 
+    return OpenUserInfo.cart.removeCartContent(cartContent);
+}
