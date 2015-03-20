@@ -29,6 +29,8 @@ var hbs = exphbs.create({
     defaultLayout: 'main',
     helpers      : handlebars_helpers
 });
+
+// Setup view engine
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -76,6 +78,8 @@ app.use(function(err, req, res, next) {
     });
 });
 
+
+// Startup server
 server.listen(app.get('port'), function () {
     console.log('Server listening on ' + app.get('port'));
 });
