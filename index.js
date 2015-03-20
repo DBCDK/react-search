@@ -13,9 +13,9 @@ var express = require('express'),
     app = express(),
     server = require('http').Server(app),
     socket = io(server),
-    authentication = require('./server/modules/authentication/authentication'),
+    authentication = require('./services/modules/authentication/authentication'),
     handlebars_helpers = require('./lib/handlebars/helpers');
-    modules = require('./server')(socket);
+    modules = require('./services')(socket);
 
 // Initialize authentication
 authentication.express(app);

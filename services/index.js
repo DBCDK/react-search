@@ -1,4 +1,4 @@
-module.exports = function(io){
+module.exports = function (io) {
   //initiate dispatcher
   var dispatcher = require('./lib/dispatcher')(io);
   ///Load Modules
