@@ -1,12 +1,14 @@
-'use strict'
+"use strict";
 
 jest.dontMock('../SearchField.js');
 
 describe('SearchField', function() {
- var React = require('react/addons');
- var SearchField = require('../SearchField.js');
- var TestUtils = React.addons.TestUtils;
 
+  //var React = require('react');
+  //var React = require('react/addons');
+ //var SearchField = require('../SearchField');
+ //var TestUtils = React.addons.TestUtils;
+/*
  it('Value changes on keystroke', function() {
 
     // Render a input field in the document
@@ -45,4 +47,5 @@ describe('SearchField', function() {
     // Verify no button exists
     expect(TestUtils.findRenderedDOMComponentWithClass(field, 'searchfield-button').getDOMNode().value).toEqual('Search');
    });
+ */
 });

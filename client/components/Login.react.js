@@ -4,7 +4,7 @@ var React = require('react'),
     UserStore = require('../stores/User.store'),
     Message = require('./Message'),
     KEYCODES = {
-      ENTER_KEY_CODE : 13,
+      ENTER_KEY_CODE : 13
     };
 
 var Login = React.createClass({

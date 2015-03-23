@@ -2,7 +2,7 @@ var React = require('react'),
     KEYCODES = {
       ENTER_KEY_CODE : 13,
       KEY_DOWN : 40,
-      KEY_UP : 38,
+      KEY_UP : 38
     };
 
 var SearchField = React.createClass({
