@@ -7,8 +7,10 @@ var React = require('react'),
 // export for http://fb.me/react-devtools
 window.React = React;
 
+var basepath = window && window._searchBasePath || '/search/'
+
 var routes = (
-  <Route handler={SearchModule} path="/search/">
+  <Route handler={SearchModule} path={basepath}>
     <Route handler={SearchModule} name="search" path=":path" />
   </Route>
 );
