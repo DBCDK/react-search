@@ -1,21 +1,11 @@
 var reflux = require('reflux');
 var actions = require('../actions/Actions.js');
-var socket = require('socket.io-client').connect();
+var emitter = require('../clientSocketEmitter/clientSocketEmitter');
 
 var _store = {
   pending: false,
   result: null,
   query: '',
-}
-
-function _listen(cb) {
-  socket.on('searchResponse', (data) => cb(data));
-}
-
-function _socketSearch(query) {
-  socket.emit('searchRequest', {
-    query: query
-  });
 }
 
 var SearchStore = reflux.createStore({
@@ -27,7 +17,9 @@ var SearchStore = reflux.createStore({
     _store.query = query;
     _store.result = null;
     this.trigger(_store);
-    _socketSearch(query);
+    emitter('search').request({
+      query: query
+    });
   },
   result: function (result) {
     _store.pending = false;
@@ -36,7 +28,7 @@ var SearchStore = reflux.createStore({
   },
   init: function() {
     this.listenTo(actions.search, this.search);
-    _listen(this.result);
+    emitter('search').response(this.result);
   },
 });
 
