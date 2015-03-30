@@ -13,7 +13,7 @@ var SearchField = React.createClass({
   render: function() {
     let button = (this.props.button) ? (<input onClick={this._onClick} className='searchfield-button' value={this.props.buttonValue} type='button' />) : '';
     return (
-      <div className='searchfield'>
+      <div className='searchfield-wrapper'>
       <input
         className='searchfield-input'
         type='text'

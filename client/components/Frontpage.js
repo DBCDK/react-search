@@ -34,14 +34,14 @@ var Frontpage = React.createClass({
   render: function() {
     var img;
     if (this.state.pending) {
-      img = (<img className='loader' src="/loader.gif" />)
+      img = (<img className='loader' src={window._socketUri + "/loader.gif"} />)
     }
     else if (this.state.images.length) {
        var image = _getImage(this.state.images, this.state.size);
        img = (<img className="frontpage" src={image.url} />)
     }
     else {
-     img = (<img className="no-image" src="/no-image.png" />)
+     img = (<img className="no-image" src={window._socketUri + "/no-image.png"} />)
     }
 
     return (

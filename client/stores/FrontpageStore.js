@@ -1,18 +1,8 @@
 var reflux = require('reflux');
 var actions = require('../actions/Actions.js');
-var socket = require('socket.io-client').connect();
+var emitter = require('../clientSocketEmitter/clientSocketEmitter');
 
 var _store = {
-}
-
-function _listen(cb) {
-  socket.on('getImagesResponse', (data) => cb(data));
-}
-
-function _frontpageRequest(pid) {
-  socket.emit('getImagesRequest', {
-    pid: pid,
-  });
 }
 
 var FrontpageStore = reflux.createStore({
@@ -25,7 +15,9 @@ var FrontpageStore = reflux.createStore({
       images : [],
     };
     this.trigger(_store);
-    _frontpageRequest(pid);
+    emitter('getImages').request({
+      pid: pid,
+    });
   },
   result: function (result) {
     _store[result.pid].pending = false;
@@ -34,7 +26,7 @@ var FrontpageStore = reflux.createStore({
   },
   init: function() {
     this.listenTo(actions.frontpage, this.request);
-    _listen(this.result);
+    emitter('getImages').response(this.result);
   },
 });
 
